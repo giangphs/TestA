@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BBD344BC1B4121EA0057A886 /* FBLikeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BBD344BB1B4121EA0057A886 /* FBLikeLayout.m */; };
 		E1CF76631B40DDD900C1F7C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CF76621B40DDD900C1F7C4 /* main.m */; };
 		E1CF76661B40DDD900C1F7C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CF76651B40DDD900C1F7C4 /* AppDelegate.m */; };
 		E1CF76691B40DDD900C1F7C4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CF76681B40DDD900C1F7C4 /* ViewController.m */; };
@@ -50,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BBD344BA1B4121EA0057A886 /* FBLikeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLikeLayout.h; sourceTree = "<group>"; };
+		BBD344BB1B4121EA0057A886 /* FBLikeLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLikeLayout.m; sourceTree = "<group>"; };
 		E1CF765D1B40DDD900C1F7C4 /* TestA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1CF76611B40DDD900C1F7C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1CF76621B40DDD900C1F7C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -128,11 +131,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BBD344B91B4121EA0057A886 /* FBLikeLayout */ = {
+			isa = PBXGroup;
+			children = (
+				BBD344BA1B4121EA0057A886 /* FBLikeLayout.h */,
+				BBD344BB1B4121EA0057A886 /* FBLikeLayout.m */,
+			);
+			path = FBLikeLayout;
+			sourceTree = "<group>";
+		};
 		E1CF76541B40DDD900C1F7C4 = {
 			isa = PBXGroup;
 			children = (
 				E1CF76C21B40F05600C1F7C4 /* CFNetwork.framework */,
 				E1CF76C01B40F05200C1F7C4 /* ImageIO.framework */,
+				BBD344B91B4121EA0057A886 /* FBLikeLayout */,
 				E1CF76861B40E4CC00C1F7C4 /* SDWebImage */,
 				E1CF765F1B40DDD900C1F7C4 /* TestA */,
 				E1CF76791B40DDD900C1F7C4 /* TestATests */,
@@ -347,6 +360,7 @@
 				E1CF76B61B40E4CC00C1F7C4 /* UIImage+WebP.m in Sources */,
 				E1CF76C71B41063B00C1F7C4 /* MyCollectionCell.m in Sources */,
 				E1CF76AC1B40E4CC00C1F7C4 /* SDImageCache.m in Sources */,
+				BBD344BC1B4121EA0057A886 /* FBLikeLayout.m in Sources */,
 				E1CF76691B40DDD900C1F7C4 /* ViewController.m in Sources */,
 				E1CF76AA1B40E4CC00C1F7C4 /* MKAnnotationView+WebCache.m in Sources */,
 				E1CF76AE1B40E4CC00C1F7C4 /* SDWebImageDecoder.m in Sources */,

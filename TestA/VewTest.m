@@ -10,8 +10,8 @@
 #import "UIImageView+WebCache.h"
 
 #import "MyCollectionCell.h"
-
-@interface VewTest ()
+#import "FBLikeLayout.h"
+@interface VewTest ()<UICollectionViewDelegateFlowLayout>
 {
     NSMutableArray *arrMutPartners;
    NSArray *arrPartners;
@@ -30,15 +30,24 @@
     arrPartners = [@[@"http://nehealthinsuranceinfo.gov/img/icon_small-business.jpg",
                      @"https://www.gtplanet.net/wp-content/uploads/2012/04/google-chrome-gtplanet.jpg",
                      @"http://media.idownloadblog.com/wp-content/uploads/2013/04/Twitter-2.2-Mac-app-icon-small.png",
-                     @"https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Small_SVG_house_icon.svg/300px-Small_SVG_house_icon.svg.png" ] copy];
+                     @"https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Small_SVG_house_icon.svg/300px-Small_SVG_house_icon.svg.png",@"http://xmedia-nguoiduatin.cdn.vccloud.vn/249/2015/6/20/mai-phuong-thuy-hoa-hau-trieu-do-cua-thuong-truong.jpg",@"http://res.vtc.vn/media/vtcnews/2014/08/23/Mai_Phuong_Thuy_02.jpg",@"http://nehealthinsuranceinfo.gov/img/icon_small-business.jpg"] copy];
 
     arrMutPartners = [NSMutableArray new];
     
     [self.myCollectionView registerNib:[UINib nibWithNibName:@"MyCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"MyCollectionCell"];
-
+    [self.myCollectionView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionOld context:NULL];
     [self fnGetImages];
 }
-
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary  *)change context:(void *)context
+{
+    //Whatever you do here when the reloadData finished
+    float newHeight = self.myCollectionView.collectionViewLayout.collectionViewContentSize.height;
+    
+    CGRect rect= self.myCollectionView.frame;
+    rect.size.height=newHeight;
+    self.myCollectionView.frame=rect;
+    NSLog(@">>> %f", newHeight);
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -90,7 +99,7 @@
                                     iCount -= 1;
                                     
                                     if (image) {
-                                        UIImage *rsized = [self fnResize:image];
+                                        UIImage *rsized = image;
                                         [arrMutPartners addObject:@{ @"image":rsized,
                                                                      @"size": [NSNumber numberWithFloat:rsized.size.width]
                                                                      }];                                    }
@@ -121,7 +130,23 @@
 
 
 
-
+-(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    
+    if(![self.myCollectionView.collectionViewLayout isKindOfClass:[FBLikeLayout class]]){
+        FBLikeLayout *layout = [FBLikeLayout new];
+        layout.minimumInteritemSpacing = 4;
+        layout.singleCellWidth = (MIN(self.myCollectionView.bounds.size.width, self.myCollectionView.bounds.size.height)-self.myCollectionView.contentInset.left-self.myCollectionView.contentInset.right-8)/3.0;
+        layout.maxCellSpace = 3;
+        layout.forceCellWidthForMinimumInteritemSpacing = YES;
+        layout.fullImagePercentageOfOccurrency = 100;
+        self.myCollectionView.collectionViewLayout = layout;
+        
+        [self.myCollectionView reloadData];
+    } else {
+        //[self.collectionView.collectionViewLayout invalidateLayout];
+    }
+}
 #pragma mark - UICollectionView
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -164,7 +189,13 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(80, 80);
+    NSDictionary *dic = arrMutPartners[indexPath.row];
+    
+    UIImage *data = dic[@"image"];
+
+    
+    NSLog(@"size %@", NSStringFromCGSize(data.size));
+    return data.size;
     
 }
 @end
