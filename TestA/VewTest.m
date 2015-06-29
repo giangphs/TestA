@@ -7,16 +7,29 @@
 //
 
 #import "VewTest.h"
+#import "UIImageView+WebCache.h"
 
 @interface VewTest ()
-
+{
+    NSMutableArray *arrMutPartners;
+   NSArray *arrPartners;
+    
+}
 @end
 
 @implementation VewTest
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    arrPartners = [@[@"http://nehealthinsuranceinfo.gov/img/icon_small-business.jpg",
+                     @"https://www.gtplanet.net/wp-content/uploads/2012/04/google-chrome-gtplanet.jpg",
+                     @"http://media.idownloadblog.com/wp-content/uploads/2013/04/Twitter-2.2-Mac-app-icon-small.png",
+                     @"https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Small_SVG_house_icon.svg/300px-Small_SVG_house_icon.svg.png" ] copy];
+
+    arrMutPartners = [NSMutableArray new];
+    
+    [self fnGetImages];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +37,63 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+-(UIImage*) fnResize :(UIImage*)img
+{
+    float actualHeight = img.size.height;
+    float actualWidth = img.size.width;
+    
+    float imgRatio = actualWidth/actualHeight;
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    float fixHeight = 80;
+    
+    imgRatio = fixHeight / actualHeight;
+    actualWidth = imgRatio * actualWidth;
+    actualHeight = fixHeight;
+
+            
+    CGRect rect = CGRectMake(0.0, 0.0, actualWidth, actualHeight);
+    UIGraphicsBeginImageContext(rect.size);
+    [img drawInRect:rect];
+    UIImage *returnImg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return returnImg;
 }
-*/
+
+-(void) fnGetImages
+{
+    //Download partners
+    if (arrPartners.count > 0) {
+        
+        UIImageView *imgParter = [[UIImageView alloc] initWithFrame:CGRectZero];
+        
+        __block int iCount = (int) arrPartners.count;
+        
+        for (NSString*strPath in arrPartners) {
+            NSURL *url  = nil;
+            url = [NSURL URLWithString: strPath];
+            
+            [imgParter sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                iCount -= 1;
+                
+                UIImage *rsized = [self fnResize:image];
+                [arrMutPartners addObject:@{ @"image":rsized,
+                                             @"size": [NSNumber numberWithFloat:rsized.size.width]
+                                             }];
+                
+                if (iCount == 0) {
+                    NSLog(@"DONE");
+                    [self fnCalcPopview];
+                }
+            }];
+            
+        }
+    }
+
+}
+
+-(void) fnCalcPopview
+{
+    NSLog(@"%@", arrMutPartners[0]);
+}
 
 @end
