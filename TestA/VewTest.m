@@ -61,10 +61,11 @@
 
 -(void) fnGetImages
 {
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    
     //Download partners
     if (arrPartners.count > 0) {
         
-        UIImageView *imgParter = [[UIImageView alloc] initWithFrame:CGRectZero];
         
         __block int iCount = (int) arrPartners.count;
         
@@ -72,19 +73,31 @@
             NSURL *url  = nil;
             url = [NSURL URLWithString: strPath];
             
-            [imgParter sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                iCount -= 1;
-                
-                UIImage *rsized = [self fnResize:image];
-                [arrMutPartners addObject:@{ @"image":rsized,
-                                             @"size": [NSNumber numberWithFloat:rsized.size.width]
-                                             }];
-                
-                if (iCount == 0) {
-                    NSLog(@"DONE");
-                    [self fnCalcPopview];
-                }
-            }];
+            [manager downloadImageWithURL:url
+                                  options:0
+                                 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                     // progression tracking code
+                                 }
+                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                    
+                                    iCount -= 1;
+                                    
+                                    if (image) {
+                                        UIImage *rsized = [self fnResize:image];
+                                        [arrMutPartners addObject:@{ @"image":rsized,
+                                                                     @"size": [NSNumber numberWithFloat:rsized.size.width]
+                                                                     }];                                    }
+                                    
+
+                                    
+                                    if (iCount == 0) {
+                                        NSLog(@"DONE");
+                                        [self fnCalcPopview];
+                                    }
+
+                                }];
+            
+
             
         }
     }
