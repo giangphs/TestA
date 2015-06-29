@@ -35,6 +35,8 @@
 		E1CF76BF1B40E54000C1F7C4 /* VewTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1CF76BD1B40E54000C1F7C4 /* VewTest.xib */; };
 		E1CF76C11B40F05200C1F7C4 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1CF76C01B40F05200C1F7C4 /* ImageIO.framework */; };
 		E1CF76C31B40F05600C1F7C4 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1CF76C21B40F05600C1F7C4 /* CFNetwork.framework */; };
+		E1CF76C71B41063B00C1F7C4 /* MyCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CF76C51B41063B00C1F7C4 /* MyCollectionCell.m */; };
+		E1CF76C81B41063B00C1F7C4 /* MyCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1CF76C61B41063B00C1F7C4 /* MyCollectionCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +103,9 @@
 		E1CF76BD1B40E54000C1F7C4 /* VewTest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VewTest.xib; sourceTree = "<group>"; };
 		E1CF76C01B40F05200C1F7C4 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		E1CF76C21B40F05600C1F7C4 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		E1CF76C41B41063B00C1F7C4 /* MyCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionCell.h; sourceTree = "<group>"; };
+		E1CF76C51B41063B00C1F7C4 /* MyCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionCell.m; sourceTree = "<group>"; };
+		E1CF76C61B41063B00C1F7C4 /* MyCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectionCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +160,9 @@
 				E1CF76BC1B40E54000C1F7C4 /* VewTest.m */,
 				E1CF76BD1B40E54000C1F7C4 /* VewTest.xib */,
 				E1CF766A1B40DDD900C1F7C4 /* Main.storyboard */,
+				E1CF76C41B41063B00C1F7C4 /* MyCollectionCell.h */,
+				E1CF76C51B41063B00C1F7C4 /* MyCollectionCell.m */,
+				E1CF76C61B41063B00C1F7C4 /* MyCollectionCell.xib */,
 				E1CF766D1B40DDD900C1F7C4 /* Images.xcassets */,
 				E1CF766F1B40DDD900C1F7C4 /* LaunchScreen.xib */,
 				E1CF76601B40DDD900C1F7C4 /* Supporting Files */,
@@ -314,6 +322,7 @@
 				E1CF76711B40DDD900C1F7C4 /* LaunchScreen.xib in Resources */,
 				E1CF76BF1B40E54000C1F7C4 /* VewTest.xib in Resources */,
 				E1CF766E1B40DDD900C1F7C4 /* Images.xcassets in Resources */,
+				E1CF76C81B41063B00C1F7C4 /* MyCollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +345,7 @@
 				E1CF76B11B40E4CC00C1F7C4 /* SDWebImageManager.m in Sources */,
 				E1CF76AF1B40E4CC00C1F7C4 /* SDWebImageDownloader.m in Sources */,
 				E1CF76B61B40E4CC00C1F7C4 /* UIImage+WebP.m in Sources */,
+				E1CF76C71B41063B00C1F7C4 /* MyCollectionCell.m in Sources */,
 				E1CF76AC1B40E4CC00C1F7C4 /* SDImageCache.m in Sources */,
 				E1CF76691B40DDD900C1F7C4 /* ViewController.m in Sources */,
 				E1CF76AA1B40E4CC00C1F7C4 /* MKAnnotationView+WebCache.m in Sources */,

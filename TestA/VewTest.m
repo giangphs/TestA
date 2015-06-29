@@ -9,12 +9,17 @@
 #import "VewTest.h"
 #import "UIImageView+WebCache.h"
 
+#import "MyCollectionCell.h"
+
 @interface VewTest ()
 {
     NSMutableArray *arrMutPartners;
    NSArray *arrPartners;
     
 }
+
+@property (nonatomic, strong)   IBOutlet  UICollectionView  *myCollectionView;
+
 @end
 
 @implementation VewTest
@@ -29,6 +34,8 @@
 
     arrMutPartners = [NSMutableArray new];
     
+    [self.myCollectionView registerNib:[UINib nibWithNibName:@"MyCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"MyCollectionCell"];
+
     [self fnGetImages];
 }
 
@@ -107,6 +114,57 @@
 -(void) fnCalcPopview
 {
     NSLog(@"%@", arrMutPartners[0]);
+    
+    [self.myCollectionView reloadData];
 }
 
+
+
+
+
+#pragma mark - UICollectionView
+//--------------------------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return arrMutPartners.count;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *identifier = @"MyCollectionCell";
+    
+    MyCollectionCell *cell = (MyCollectionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
+    cell.backgroundColor=[UIColor whiteColor];
+    NSDictionary *dic = arrMutPartners[indexPath.row];
+    
+    cell.imgBrand.image = dic[@"image"];
+    
+    return cell;
+}
+//------------------------------------------------------------------------------------------------------------------------
+
+- (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 1;
+}
+//------------------------------------------------------------------------------------------------------------------------
+
+- (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 1;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(0,0,0,0);
+}
+//------------------------------------------------------------------------------------------------------------------------
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(80, 80);
+    
+}
 @end
